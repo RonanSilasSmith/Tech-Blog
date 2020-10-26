@@ -4,32 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tech Blog</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="wrapper">
-        <header>
-            <nav>
-                <a href="/">Home</a>
+        <header class="dark">
+            <nav class="d-flex justify-content-around">
+                <a href="/" class="border border-primary rounded-lg" style="padding: 10px;">home</a>
                 {{#if loggedIn}}
-                <a href="/dashboard">Dashboard</a>
-                <button id="logout" class="btn-no-style">Logout</button>
+                <a href="/dashboard" class="border border-primary rounded-lg " style="padding: 10px;">dashboard</a>
+                <button id="logout" class="btn btn-link border border-primary rounded-lg " style="padding: 10px;">logout</button>
                 {{else}}
-                <a href="/login">Login</a>
+                <a href="/login" class="border border-primary rounded-lg" style="padding: 10px;">login</a>
                 {{/if}}
             </nav>
-            <h1>
-                <a href="/">The Tech Blog</a>
-            </h1>
+                <h1>
+                    <a href="/" class="d-flex justify-content-center">The Tech Blog</a>
+                </h1>
         </header>
+        <br>
+        <br>
         <main>
             {{{ body }}}
         </main>
-        <footer>
-            Thanks for visiting!
-        </footer>
     </div>
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>

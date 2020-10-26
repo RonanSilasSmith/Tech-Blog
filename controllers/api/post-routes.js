@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
-            'post_url',
+            'description',
             'title',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
 });
 
 // PUT /api/posts/upvote
-router.put('/upvote', withAuth, (req, res) => {
+router.put('/upvote', (req, res) => {
     // make sure the session exists first
     if (req.session) {
         // pass session id along with all destructured properties on req.body
@@ -60,7 +60,7 @@ router.get('/:id', (req, res) => {
         },
         attributes: [
             'id',
-            'post_url',
+            'description',
             'title',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
@@ -86,11 +86,11 @@ router.get('/:id', (req, res) => {
 });
 
 //create a post
-router.post('/', withAuth, (req, res) => {
-    // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+router.post('/', (req, res) => {
+    // expects {title: 'Taskmaster goes public!', description: 'https://taskmaster.com/press', user_id: 1}
     Post.create({
         title: req.body.title,
-        post_url: req.body.post_url,
+        description: req.body.description,
         user_id: req.session.user_id
     })
     .then(dbPostData => res.json(dbPostData))
@@ -101,7 +101,7 @@ router.post('/', withAuth, (req, res) => {
 });
 
 //update a post
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
     Post.update(
         {
             title: req.body.title
@@ -126,7 +126,7 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 //destroy a post
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     Post.destroy({
         where: {
             id: req.params.id

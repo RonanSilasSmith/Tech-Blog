@@ -1,0 +1,23 @@
+<article class="post">
+    <div class="title card">
+        <div class="card-header d-flex justify-content-around">
+            <a href="/post/{{id}}" target="_blank">{{title}}</a>
+
+            {{#unless description}}
+            <p>{{vote_count}} {{format_plural "updoot" vote_count}}</p>
+            {{/unless}}
+            
+            <p>Posted by {{user.username}} on {{format_date created_at}}</p>
+        </div>
+        
+        {{#if description}}
+        <p class="card-text">{{description}}</p>
+        <br>
+        <p>{{vote_count}} {{format_plural "updoot" vote_count}}</p>
+        {{/if}}
+    </div>
+    
+    <div class="meta">
+        <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+    </div>
+</article>
